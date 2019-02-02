@@ -11,8 +11,8 @@ class RedisController {
     @Autowired
     lateinit var redisTemplate: StringRedisTemplate
 
-    @PostMapping("/redis/countup")
-    fun count(): Long? {
+    @PostMapping("/redis/count-up")
+    fun countUp(): Long? {
         val count = redisTemplate.opsForValue().increment(KEY_COUNT)
         redisTemplate.opsForValue().set(KEY_COUNT, count.toString())
         return count
