@@ -18,6 +18,13 @@ class RedisController {
         return count
     }
 
+    @PostMapping("/redis/clear")
+    fun clear() {
+        redisTemplate.apply {
+            delete(KEY_COUNT)
+        }
+    }
+
     companion object {
         private const val KEY_COUNT = "count:v1"
     }
