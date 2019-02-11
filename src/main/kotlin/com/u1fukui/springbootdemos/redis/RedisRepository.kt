@@ -1,12 +1,22 @@
 package com.u1fukui.springbootdemos.redis
 
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.stereotype.Repository
 import org.springframework.web.client.RestTemplate
 
-open class RedisRepository(
-        private val redisTemplate: RedisTemplate<String, Any>,
-        private val restTemplate: RestTemplate
-) {
+@Repository
+open class RedisRepository {
+
+    @Autowired
+    lateinit var redisTemplate: RedisTemplate<String, Any>
+
+    @Autowired
+    @Qualifier(RestTemplateConfiguration.GITHUB)
+    lateinit var restTemplate: RestTemplate
+
     fun clear() = redisTemplate.apply {
         delete(KEY_COUNT)
         delete(KEY_GITHUB_SEARCH_RESULT)
@@ -25,12 +35,15 @@ open class RedisRepository(
         }
     }
 
+    @Cacheable(value = [KEY_GITHUB_SEARCH_RESULT], key = "#query")
+    open fun searchWithCacheableAnnotation(query: String): RepositorySearchResult =
+            searchGitHubRepository(query)
+
     private fun searchGitHubRepository(query: String): RepositorySearchResult =
             restTemplate.getForObject(
                     "https://api.github.com/search/repositories?q=$query",
                     RepositorySearchResult::class.java
             ) ?: throw Exception()
-
 
     companion object {
         private const val KEY_COUNT = "count:v1"

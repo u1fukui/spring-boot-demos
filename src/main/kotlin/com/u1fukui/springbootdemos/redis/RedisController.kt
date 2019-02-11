@@ -19,5 +19,9 @@ class RedisController {
 
     @GetMapping("/redis/search")
     fun search(@RequestParam("q") query: String): RepositorySearchResult =
-            redisRepository.search(query)
+            redisRepository.searchWithRedisTemplate(query)
+
+    @GetMapping("/redis/search2")
+    fun search2(@RequestParam("q") query: String): RepositorySearchResult =
+            redisRepository.searchWithCacheableAnnotation(query)
 }

@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.cache.CacheManager
+import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.cache.RedisCacheConfiguration
@@ -17,17 +17,13 @@ import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair
 import org.springframework.data.redis.serializer.StringRedisSerializer
-import org.springframework.web.client.RestTemplate
 
 @Configuration
+@EnableCaching
 class RedisConfiguration {
 
     @Autowired
     lateinit var redisConnectionFactory: RedisConnectionFactory
-
-    @Autowired
-    @Qualifier(RestTemplateConfiguration.GITHUB)
-    lateinit var restTemplate: RestTemplate
 
     @Bean
     fun redisTemplate(): RedisTemplate<String, Any> =
@@ -38,8 +34,11 @@ class RedisConfiguration {
             }
 
     @Bean
-    fun redisRepository(): RedisRepository =
-            RedisRepository(redisTemplate(), restTemplate)
+    fun cacheManager(): CacheManager =
+            RedisCacheManager.builder(redisConnectionFactory)
+                    .cacheDefaults(RedisCacheConfiguration.defaultCacheConfig()
+                            .serializeValuesWith(SerializationPair.fromSerializer<Any>(serializer)))
+                    .build()
 
     companion object {
         val serializer = GenericJackson2JsonRedisSerializer(
