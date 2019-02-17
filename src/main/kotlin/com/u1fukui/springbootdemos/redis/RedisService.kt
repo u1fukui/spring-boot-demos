@@ -1,6 +1,6 @@
 package com.u1fukui.springbootdemos.redis
 
-import com.u1fukui.springbootdemos.RestTemplateConfiguration
+import com.u1fukui.springbootdemos.rest.RestTemplateConfiguration
 import com.u1fukui.springbootdemos.dto.RepositorySearchResult
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier

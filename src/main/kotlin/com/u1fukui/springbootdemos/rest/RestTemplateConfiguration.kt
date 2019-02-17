@@ -1,4 +1,4 @@
-package com.u1fukui.springbootdemos
+package com.u1fukui.springbootdemos.rest
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
