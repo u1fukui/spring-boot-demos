@@ -4,6 +4,7 @@ import com.u1fukui.springbootdemos.dto.RepositorySearchResult
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Repository
+import java.util.concurrent.TimeUnit
 
 @Repository
 class RedisRepository {
@@ -12,11 +13,11 @@ class RedisRepository {
     lateinit var redisTemplate: RedisTemplate<String, Any>
 
     fun clearAll() = redisTemplate.apply {
-        delete(RedisRepository.KEY_COUNT)
-        delete(RedisRepository.KEY_GITHUB_SEARCH_RESULT)
+        delete(KEY_COUNT)
+        delete(KEY_GITHUB_SEARCH_RESULT)
     }
 
-    fun countUp(): Long = redisTemplate.opsForValue().increment(RedisRepository.KEY_COUNT)!!
+    fun countUp(): Long = redisTemplate.opsForValue().increment(KEY_COUNT)!!
 
     fun findSearchResult(query: String): RepositorySearchResult? {
         val key = getSearchResultKey(query)
@@ -25,7 +26,7 @@ class RedisRepository {
 
     fun storeSearchResult(query: String, result: RepositorySearchResult) {
         val key = getSearchResultKey(query)
-        redisTemplate.opsForValue().set(key, result)
+        redisTemplate.opsForValue().set(key, result, 30, TimeUnit.SECONDS)
     }
 
     private fun getSearchResultKey(query: String) = "$KEY_GITHUB_SEARCH_RESULT::$query"
