@@ -1,24 +1,17 @@
-package com.u1fukui.springbootdemos.redis
+package com.u1fukui.springbootdemos.`spring-cache`
 
 import com.u1fukui.springbootdemos.dto.RepositorySearchResult
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class RedisController {
+class SpringCacheController {
     @Autowired
-    lateinit var redisService: RedisService
+    lateinit var springCacheService: SpringCacheService
 
-    @PostMapping("/redis/count-up")
-    fun countUp(): Long = redisService.countUp()
-
-    @PostMapping("/redis/clear")
-    fun clearAll() = redisService.clearAll()
-
-    @GetMapping("/redis/search")
+    @GetMapping("/spring-cache/search")
     fun search(@RequestParam("q") query: String): RepositorySearchResult =
-            redisService.search(query)
+            springCacheService.search(query)
 }
