@@ -1,4 +1,4 @@
-package com.u1fukui.springbootdemos.cache
+package com.u1fukui.springbootdemos.`spring-cache`
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.AutoConfigureAfter

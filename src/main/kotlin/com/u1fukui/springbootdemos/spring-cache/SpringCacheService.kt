@@ -1,6 +1,6 @@
-package com.u1fukui.springbootdemos.cache
+package com.u1fukui.springbootdemos.`spring-cache`
 
-import com.u1fukui.springbootdemos.cache.SpringCache.Companion.GITHUB_SEARCH_RESULT
+import com.u1fukui.springbootdemos.`spring-cache`.SpringCache.Companion.GITHUB_SEARCH_RESULT
 import com.u1fukui.springbootdemos.dto.RepositorySearchResult
 import com.u1fukui.springbootdemos.rest.RestTemplateConfiguration
 import org.springframework.beans.factory.annotation.Autowired

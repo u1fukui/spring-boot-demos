@@ -1,4 +1,4 @@
-package com.u1fukui.springbootdemos.cache
+package com.u1fukui.springbootdemos.`spring-cache`
 
 import java.time.Duration
 import java.time.temporal.ChronoUnit
