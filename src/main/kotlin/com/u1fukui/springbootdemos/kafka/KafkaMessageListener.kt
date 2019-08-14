@@ -10,9 +10,10 @@ class KafkaMessageListener {
 
     @KafkaListener(topics = [KafkaConfiguration.TOPIC_TEST], groupId = "group1")
     fun listenTestTopic(
-            message: String,
-            @Header(KafkaHeaders.RECEIVED_PARTITION_ID) partition: Int
+            messages: List<String>,
+            @Header(KafkaHeaders.RECEIVED_PARTITION_ID) partition: Int,
+            @Header(KafkaHeaders.OFFSET) offset: Int
     ) {
-        println("Received Message: $message from partition: $partition")
+        println("Received Message: ${messages.size}. partition: $partition. offset: $offset")
     }
 }

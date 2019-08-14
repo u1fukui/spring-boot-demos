@@ -51,6 +51,7 @@ class KafkaConfiguration {
     fun kafkaListenerContainerFactory(): ConcurrentKafkaListenerContainerFactory<String, String> =
             ConcurrentKafkaListenerContainerFactory<String, String>().apply {
                 consumerFactory = consumerFactory()
+                isBatchListener = true
             }
 
     companion object {
