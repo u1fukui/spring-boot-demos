@@ -16,7 +16,7 @@ import java.time.Duration
 @Configuration
 @EnableCaching
 @AutoConfigureAfter(value = [RedisCacheConfiguration::class])
-class SpringCacheConfiguration {
+class SpringCacheConfig {
 
     @Autowired
     lateinit var redisConnectionFactory: RedisConnectionFactory

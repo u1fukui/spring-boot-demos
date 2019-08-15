@@ -11,7 +11,7 @@
 
 ### 2. CacheManager を設定する
 - キャッシュの設定は、`CacheManager`のBeanを作る時に設定する
-  - `SpringCacheConfiguration` 参照
+  - `SpringCacheConfig` 参照
 - 今回はRedisを使ってキャッシュを実現している　 
   - Redisの設定は、[別の箇所](../redis)で設定済み
 

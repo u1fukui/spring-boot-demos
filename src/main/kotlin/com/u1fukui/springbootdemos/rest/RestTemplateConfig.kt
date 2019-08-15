@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate
 
 
 @Configuration
-class RestTemplateConfiguration {
+class RestTemplateConfig {
 
     @Bean(name = [GITHUB])
     fun githubRestTemplate(): RestTemplate {

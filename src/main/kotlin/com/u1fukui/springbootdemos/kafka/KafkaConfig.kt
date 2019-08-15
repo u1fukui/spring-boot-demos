@@ -18,7 +18,7 @@ import org.springframework.kafka.core.ProducerFactory
 
 @EnableKafka
 @Configuration
-class KafkaConfiguration {
+class KafkaConfig {
 
     @Value(value = "\${kafka.bootstrapServers}")
     lateinit var bootstrapServers: String

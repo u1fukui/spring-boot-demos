@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 @Component
 class KafkaMessageListener {
 
-    @KafkaListener(topics = [KafkaConfiguration.TOPIC_TEST], groupId = "group1")
+    @KafkaListener(topics = [KafkaConfig.TOPIC_TEST], groupId = "group1")
     fun listenTestTopic(
             messages: List<String>,
             @Header(KafkaHeaders.RECEIVED_PARTITION_ID) partition: Int,

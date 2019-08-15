@@ -15,7 +15,7 @@ class KafkaService {
 
     fun sendTestMessage(message: String) {
         kafkaTemplate.send(
-                KafkaConfiguration.TOPIC_TEST,
+                KafkaConfig.TOPIC_TEST,
                 message
         ).addCallback(object : ListenableFutureCallback<SendResult<String, String>> {
             override fun onSuccess(result: SendResult<String, String>?) {

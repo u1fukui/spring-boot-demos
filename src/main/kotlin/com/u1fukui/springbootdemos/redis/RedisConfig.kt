@@ -15,7 +15,7 @@ import org.springframework.data.redis.serializer.RedisSerializer
 import org.springframework.data.redis.serializer.StringRedisSerializer
 
 @Configuration
-class RedisConfiguration {
+class RedisConfig {
 
     @Autowired
     lateinit var redisConnectionFactory: RedisConnectionFactory

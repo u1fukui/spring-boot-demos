@@ -2,7 +2,7 @@ package com.u1fukui.springbootdemos.`spring-cache`
 
 import com.u1fukui.springbootdemos.`spring-cache`.SpringCache.Companion.GITHUB_SEARCH_RESULT
 import com.u1fukui.springbootdemos.dto.RepositorySearchResult
-import com.u1fukui.springbootdemos.rest.RestTemplateConfiguration
+import com.u1fukui.springbootdemos.rest.RestTemplateConfig
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.cache.annotation.Cacheable
@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate
 class SpringCacheService {
 
     @Autowired
-    @Qualifier(RestTemplateConfiguration.GITHUB)
+    @Qualifier(RestTemplateConfig.GITHUB)
     lateinit var restTemplate: RestTemplate
 
     @Cacheable(
